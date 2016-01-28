@@ -7,6 +7,10 @@ class jenkins::config {
   }
 
   create_resources( 'jenkins::sysconfig', $::jenkins::config_hash )
+  if ! has_key($::jenkins::config_hash, 'JENKINS_HOME') {
+    jenkins::sysconfig {'JENKINS_HOME':
+      value => $::jenkins::localstatedir,
+    }
   }
 
 }
