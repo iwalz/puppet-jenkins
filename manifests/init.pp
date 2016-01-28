@@ -260,6 +260,7 @@ class jenkins(
   }
   include $jenkins_package_class
 
+  include jenkins::pre_config
   include jenkins::config
   include jenkins::plugins
   include jenkins::jobs
@@ -311,12 +312,13 @@ class jenkins(
   }
 
   Anchor['jenkins::begin'] ->
-    Class[$jenkins_package_class] ->
-      Class['jenkins::config'] ->
-        Class['jenkins::plugins'] ~>
-          Class['jenkins::service'] ->
-            Class['jenkins::jobs'] ->
-              Anchor['jenkins::end']
+    Class['jenkins::pre_config'] ->
+      Class[$jenkins_package_class] ->
+        Class['jenkins::config'] ->
+          Class['jenkins::plugins'] ~>
+            Class['jenkins::service'] ->
+              Class['jenkins::jobs'] ->
+                Anchor['jenkins::end']
 
   if $install_java {
     Anchor['jenkins::begin'] ->
