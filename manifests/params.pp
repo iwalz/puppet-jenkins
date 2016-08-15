@@ -32,7 +32,7 @@ class jenkins::params {
       $service_provider = undef
     }
     'RedHat': {
-      $libdir           = '/usr/lib/jenkins'
+      $libdir           = '/usr/share/jenkins'
       $package_provider = 'rpm'
       case $::operatingsystem {
         'Fedora': {
@@ -51,7 +51,7 @@ class jenkins::params {
       }
     }
     default: {
-      $libdir           = '/usr/lib/jenkins'
+      $libdir           = '/usr/share/jenkins'
       $package_provider = false
       $service_provider = undef
     }
