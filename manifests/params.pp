@@ -29,11 +29,11 @@ class jenkins::params {
       $package_provider = 'dpkg'
     }
     'RedHat': {
-      $libdir           = '/usr/lib/jenkins'
+      $libdir           = '/usr/share/jenkins'
       $package_provider = 'rpm'
     }
     default: {
-      $libdir           = '/usr/lib/jenkins'
+      $libdir           = '/usr/share/jenkins'
       $package_provider = false
     }
   }
