@@ -22,8 +22,8 @@ class jenkins::cli {
     Class['jenkins::cli'] ->
       Anchor['jenkins::end']
 
-  $jar = "${jenkins::libdir}/jenkins-cli.jar"
-  $extract_jar = "jar -xf ${jenkins::libdir}/jenkins.war WEB-INF/jenkins-cli.jar"
+  $jar = "/usr/share/jenkins/jenkins-cli.jar"
+  $extract_jar = "jar -xf /usr/share/jenkins/jenkins.war WEB-INF/jenkins-cli.jar"
   $move_jar = "mv WEB-INF/jenkins-cli.jar ${jar}"
   $remove_dir = 'rm -rf WEB-INF'
 
@@ -54,7 +54,7 @@ class jenkins::cli {
   $cmd = join(
     delete_undef_values([
       'java',
-      "-jar ${::jenkins::cli::jar}",
+      "-jar /usr/share/jenkins/jenkins-cli.jar",
       "-s http://localhost:${port}${prefix}",
       $auth_arg,
     ]),
